@@ -74,6 +74,13 @@ body {
   color: #ffffff !important;
 }
 
+/* Mobile menu dropdown background */
+@media screen and (max-width: 1023px) {
+  .navbar-menu {
+    background-color: var(--flf-earth-brown) !important;
+  }
+}
+
 /* Hero Section */
 .hero {
   background: linear-gradient(135deg, var(--flf-light-tan) 0%, var(--flf-cream) 100%);
@@ -283,6 +290,10 @@ p {
   
   section {
     padding: 3rem 1rem;
+  }
+  
+  .fact-box .subtitle {
+    font-size: 1rem !important;
   }
 }
 
