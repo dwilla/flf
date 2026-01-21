@@ -1,0 +1,309 @@
+/* Fourth Light Farm - Custom Bulma Theme */
+
+:root {
+  /* Brand Colors from Brochure */
+  --flf-sage-green: #b8c5a8;
+  --flf-earth-brown: #3e2c1f;
+  --flf-light-tan: #e8e3d5;
+  --flf-cream: #f5f2ea;
+  --flf-dark-soil: #2b2423;
+  --flf-medium-green: #8a9b7a;
+  --flf-light-green: #d4dbc9;
+  
+  /* Bulma Variable Overrides */
+  --bulma-primary-h: 95;
+  --bulma-primary-s: 25%;
+  --bulma-primary-l: 72%;
+  --bulma-link: var(--flf-medium-green);
+  --bulma-link-hover: var(--flf-earth-brown);
+  --bulma-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Body and Background */
+body {
+  background-color: var(--flf-cream);
+  color: var(--flf-dark-soil);
+  font-family: var(--bulma-family-primary);
+}
+
+/* Custom Primary Color */
+.has-background-primary-custom {
+  background-color: var(--flf-sage-green) !important;
+}
+
+.has-background-earth {
+  background-color: var(--flf-earth-brown) !important;
+}
+
+.has-background-tan {
+  background-color: var(--flf-light-tan) !important;
+}
+
+.has-background-cream {
+  background-color: var(--flf-cream) !important;
+}
+
+.has-text-earth {
+  color: var(--flf-earth-brown) !important;
+}
+
+.has-text-sage {
+  color: var(--flf-sage-green) !important;
+}
+
+/* Navbar Styling */
+.navbar {
+  background-color: var(--flf-earth-brown) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-item,
+.navbar-link {
+  color: #ffffff !important;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-item:hover,
+.navbar-link:hover {
+  background-color: rgba(184, 197, 168, 0.2) !important;
+  color: var(--flf-light-green) !important;
+}
+
+.navbar-burger {
+  color: #ffffff !important;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, var(--flf-light-tan) 0%, var(--flf-cream) 100%);
+  position: relative;
+}
+
+.hero.is-fullheight {
+  min-height: 100vh;
+}
+
+.hero-body {
+  padding: 3rem 1.5rem;
+}
+
+/* Logo Placeholder */
+.logo-placeholder {
+  margin: 0 auto 2rem;
+  display: block;
+}
+
+/* Section Styling */
+section {
+  padding: 4rem 1.5rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--flf-earth-brown);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: var(--flf-medium-green);
+  text-align: center;
+  margin-bottom: 3rem;
+  font-style: italic;
+}
+
+/* Card Styling */
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  background-color: var(--flf-sage-green);
+  color: var(--flf-earth-brown);
+  font-weight: 700;
+  padding: 1rem 1.25rem;
+  border-radius: 8px 8px 0 0;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+/* Fun Facts Boxes */
+.fact-box {
+  background-color: var(--flf-light-green);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--flf-medium-green);
+  margin-bottom: 1.5rem;
+}
+
+.fact-box p {
+  margin: 0;
+  color: var(--flf-dark-soil);
+  line-height: 1.6;
+}
+
+/* Buttons */
+.button.is-primary-custom {
+  background-color: var(--flf-medium-green);
+  color: white;
+  border: none;
+  font-weight: 600;
+  padding: 1.25rem 2.5rem;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button.is-primary-custom:hover {
+  background-color: var(--flf-earth-brown);
+  transform: translateY(-2px);
+}
+
+.button.is-earth {
+  background-color: var(--flf-earth-brown);
+  color: white;
+  border: none;
+  font-weight: 600;
+}
+
+.button.is-earth:hover {
+  background-color: var(--flf-dark-soil);
+}
+
+.button.is-earth-outlined {
+  background-color: transparent;
+  color: var(--flf-earth-brown);
+  border: 2px solid var(--flf-earth-brown);
+  font-weight: 600;
+  padding: 1.25rem 2.5rem;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
+}
+
+.button.is-earth-outlined:hover {
+  background-color: var(--flf-earth-brown);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.button.is-earth-outlined .icon {
+  transition: transform 0.3s ease;
+}
+
+.button.is-earth-outlined:hover .icon {
+  transform: scale(1.1);
+}
+
+/* Contact Section */
+.contact-info {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-item {
+  margin-bottom: 1.5rem;
+}
+
+.contact-item strong {
+  color: var(--flf-earth-brown);
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.contact-item a {
+  color: var(--flf-medium-green);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: var(--flf-earth-brown);
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--flf-earth-brown);
+  color: var(--flf-cream);
+  padding: 3rem 1.5rem;
+}
+
+.footer a {
+  color: var(--flf-sage-green);
+}
+
+.footer a:hover {
+  color: var(--flf-light-green);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--flf-earth-brown);
+  font-weight: 700;
+}
+
+p {
+  line-height: 1.7;
+  color: var(--flf-dark-soil);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .hero-body {
+    padding: 2rem 1rem;
+  }
+  
+  section {
+    padding: 3rem 1rem;
+  }
+}
+
+/* Utilities */
+.has-text-centered-mobile {
+  text-align: center;
+}
+
+@media screen and (min-width: 769px) {
+  .has-text-centered-mobile {
+    text-align: inherit;
+  }
+}
+
+.est-badge {
+  display: inline-block;
+  background-color: var(--flf-earth-brown);
+  color: var(--flf-cream);
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-top: 1rem;
+}
