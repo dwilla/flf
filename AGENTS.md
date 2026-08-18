@@ -28,7 +28,7 @@ When asked to add a new card, section, or nav item, follow the existing pattern 
 
 ## Known placeholders — flag these, don't silently "fix" them
 
-- The donate buttons (`#oneTimeDonateBtn`, `#monthlyDonateBtn`) link to `YOUR_ONE_TIME_PAYMENT_LINK_HERE` and `YOUR_MONTHLY_PAYMENT_LINK_HERE`. These are unset placeholders, presumably meant for Stripe payment links. If the user gives you real payment links, swap them in. If they ask you to "fix the donate buttons" without providing a link, ask them for the actual payment URL rather than inventing one.
+- The donate section has six tier buttons: one-time (`#oneTimeDonateBtn5`, `#oneTimeDonateBtn10`, `#oneTimeDonateBtnCustom`) and monthly (`#monthlyDonateBtn5`, `#monthlyDonateBtn10`, `#monthlyDonateBtnCustom`). They link to per-tier placeholders like `YOUR_ONE_TIME_5_PAYMENT_LINK_HERE` and `YOUR_MONTHLY_CUSTOM_PAYMENT_LINK_HERE`. These are unset placeholders, presumably meant for individual Stripe payment links per tier. If the user gives you real payment links, swap them in. If they ask you to "fix the donate buttons" without providing links, ask them for the actual payment URLs rather than inventing them.
 - The newsletter form submits to a hardcoded Google Apps Script URL (`SCRIPT_URL` near the bottom of `index.html`). That script lives outside this repo. If the user wants to change what fields the form collects (e.g. add a "zip code" field), the Apps Script itself will also need updating elsewhere — mention this rather than assuming the field will silently start working.
 
 ## Styling conventions
