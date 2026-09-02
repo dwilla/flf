@@ -4,10 +4,14 @@ This repo is the marketing/donation website for Fourth Light Farm, a small susta
 
 ## What this site is
 
-A single static HTML page. No framework, no build step, no package manager, no dependencies to install.
+Static HTML pages. No framework, no build step, no package manager, no dependencies to install.
 
-- `index.html` — everything: markup, all page sections, and a small inline `<script>` at the bottom for the mobile nav toggle, smooth scrolling, the newsletter form submission, and donation-return notifications.
-- `theme.css` — all custom styling, layered on top of the Bulma CSS framework (loaded from a CDN in `index.html`, not vendored in this repo).
+- `index.html` — the main page: markup, all page sections, and a small inline `<script>` at the bottom for the mobile nav toggle, smooth scrolling, the newsletter form submission, and donation-return notifications.
+- `mission.html` — a second page with the farm's mission statement and the recurring scholarship commitment (currently: 4 scholarships of $500 each, every year 2026-2028). Links to `goals.html` for the full year-by-year breakdown.
+- `goals.html` — a third page with the farm's three-year goals (2026, 2027, 2028), each as its own card of specific initiatives, plus the same scholarship commitment banner as `mission.html`.
+
+Both `mission.html` and `goals.html` link back to `index.html`'s sections (e.g. `index.html#about`) since those sections only exist on the main page. Keep nav/footer structure in sync across all three files when any one changes.
+- `theme.css` — all custom styling, layered on top of the Bulma CSS framework (loaded from a CDN in both HTML files, not vendored in this repo).
 - `logo.svg` — the farm logo, used in the hero section.
 - `CNAME` — GitHub Pages custom domain file. Only touch this if the user explicitly asks to change the site's domain.
 
@@ -30,6 +34,8 @@ When asked to add a new card, section, or nav item, follow the existing pattern 
 
 - The donate section has six tier buttons: one-time (`#oneTimeDonateBtn5`, `#oneTimeDonateBtn10`, `#oneTimeDonateBtnCustom`) and monthly (`#monthlyDonateBtn5`, `#monthlyDonateBtn10`, `#monthlyDonateBtnCustom`). Each links to a real Stripe payment link for that tier. If the user wants a tier's amount or link changed, update the `href` on the matching button id; don't invent a link if they ask for a new tier without providing one.
 - The newsletter form submits to a hardcoded Google Apps Script URL (`SCRIPT_URL` near the bottom of `index.html`). That script lives outside this repo. If the user wants to change what fields the form collects (e.g. add a "zip code" field), the Apps Script itself will also need updating elsewhere — mention this rather than assuming the field will silently start working.
+- The scholarship commitment ("4 Scholarships — $500 Each", every year 2026-2028) appears on both `mission.html` and `goals.html` and must stay in sync between them. It's a specific figure the user gave directly — don't change the number, years, or wording on either page without the user explicitly providing the new value.
+- `goals.html`'s three year-by-year goal lists (2026, 2027, 2028) are specific initiatives the user gave directly — don't add, remove, or reword them without the user's input.
 
 ## Styling conventions
 
