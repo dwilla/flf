@@ -11,6 +11,7 @@ Static HTML pages. No framework, no build step, no package manager, no dependenc
 - `goals.html` — a third page with the farm's three-year goals (2026, 2027, 2028), each as its own card of specific initiatives, plus the same scholarship commitment banner as `mission.html`.
 
 Both `mission.html` and `goals.html` link back to `index.html`'s sections (e.g. `index.html#about`) since those sections only exist on the main page. Keep nav/footer structure in sync across all three files when any one changes.
+- `404.html` — GitHub Pages' custom not-found page (served automatically for any unmatched URL, no config needed since Pages is `build_type: legacy`). Shows a Font Awesome cow icon (`fa-cow`) with a circular "?" badge overlaid on it and a link back home. Keep its nav/footer in sync with the other pages too.
 - `theme.css` — all custom styling, layered on top of the Bulma CSS framework (loaded from a CDN in both HTML files, not vendored in this repo).
 - `logo.svg` — the farm logo, used in the hero section.
 - `CNAME` — GitHub Pages custom domain file. Only touch this if the user explicitly asks to change the site's domain.

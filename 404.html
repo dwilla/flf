@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Page not found | Fourth Light Farm">
+  <title>Page Not Found | Fourth Light Farm</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+
+  <!-- Bulma CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+  <!-- Custom Theme -->
+  <link rel="stylesheet" href="theme.css">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- Sticky Navigation -->
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="index.html#home">
+          <h1 class="has-text-white"><strong style="font-size: 1.25rem;">Fourth Light Farm</strong></h1>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="index.html#home">Home</a>
+          <a class="navbar-item" href="index.html#about">About</a>
+          <a class="navbar-item" href="mission.html">Mission</a>
+          <a class="navbar-item" href="goals.html">Goals</a>
+          <a class="navbar-item" href="index.html#contact">Contact</a>
+          <div class="is-flex is-align-items-center">
+            <a class="button is-white is-outlined ml-2" href="index.html#donate">Donate</a>
+          </div>
+        </div>
+      </div>
+  </nav>
+
+  <!-- 404 Section -->
+  <section class="hero is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div style="position: relative; display: inline-block;">
+          <i class="fas fa-cow" style="font-size: 9rem; color: var(--flf-earth-brown);"></i>
+          <span
+            style="position: absolute; top: -0.5rem; right: -1.5rem; background-color: var(--flf-medium-green); color: white; border-radius: 50%; width: 3rem; height: 3rem; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; font-weight: 700; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+            ?
+          </span>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 1.5rem; margin-bottom: 0.5rem;">404</h2>
+        <p class="section-subtitle">This page must have wandered off the farm.</p>
+
+        <p style="font-size: 1.15rem; max-width: 32rem; margin: 0 auto 2rem;">
+          We couldn't find the page you were looking for. It might have moved, or the link might be out of date.
+        </p>
+
+        <a href="index.html#home" class="button is-primary-custom is-large">
+          <span>Back to the Homepage</span>
+          <span class="icon">
+            <i class="fas fa-arrow-left"></i>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-4">
+          <h4 class="title is-5" style="color: var(--flf-sage-green);">Fourth Light Farm</h4>
+          <p style="color: var(--flf-sage-green);">Cultivating healthy soil, nourishing communities, and sharing the joy
+            of sustainable agriculture.</p>
+          <div style="margin-top: 1rem; color: var(--flf-sage-green);">Est. 2025</div>
+        </div>
+
+        <div class="column is-4">
+          <h4 class="title is-5" style="color: var(--flf-sage-green);">Quick Links</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="mission.html">Mission</a></li>
+            <li><a href="goals.html">Goals</a></li>
+            <li><a href="index.html#donate">Donate</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="column is-4">
+          <h4 class="title is-5" style="color: var(--flf-sage-green);">Connect With Us</h4>
+          <div class="buttons">
+            <a href="https://instagram.com/fourthlightfarm" target="_blank" rel="noopener" class="button is-small"
+              style="background-color: var(--flf-sage-green); color: var(--flf-earth-brown);">
+              <span class="icon">
+                <i class="fab fa-instagram"></i>
+              </span>
+              <span>Instagram</span>
+            </a>
+          </div>
+          <p style="margin-top: 1rem;">
+            <a href="mailto:fourthlightfarm@gmail.com">fourthlightfarm@gmail.com</a><br>
+            <a href="tel:+16032651380">(603) 265-1380</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="content has-text-centered"
+        style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(184, 197, 168, 0.3);">
+        <p style="color: var(--flf-sage-green);">&copy; 2025 Fourth Light Farm. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Mobile Menu Toggle -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get all "navbar-burger" elements
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      // Add a click event on each of them
+      $navbarBurgers.forEach(el => {
+        el.addEventListener('click', () => {
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
