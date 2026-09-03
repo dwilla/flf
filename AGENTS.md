@@ -36,6 +36,7 @@ When asked to add a new card, section, or nav item, follow the existing pattern 
 - The newsletter form submits to a hardcoded Google Apps Script URL (`SCRIPT_URL` near the bottom of `index.html`). That script lives outside this repo. If the user wants to change what fields the form collects (e.g. add a "zip code" field), the Apps Script itself will also need updating elsewhere — mention this rather than assuming the field will silently start working.
 - The scholarship commitment ("4 Scholarships — $500 Each", every year 2026-2028) appears on both `mission.html` and `goals.html` and must stay in sync between them. It's a specific figure the user gave directly — don't change the number, years, or wording on either page without the user explicitly providing the new value.
 - `goals.html`'s three year-by-year goal lists (2026, 2027, 2028) are specific initiatives the user gave directly — don't add, remove, or reword them without the user's input.
+- Three "Apply Here!" buttons (`#scholarshipApplyBtnHome` in `index.html`'s hero, `#scholarshipApplyBtnMission` in `mission.html`, `#scholarshipApplyBtnGoals` in `goals.html`) all link to the scholarship Google Form at `https://forms.gle/4b7SmUfATuS27h1S7`. If the user gives a new form link, update it in all three files.
 
 ## Styling conventions
 
