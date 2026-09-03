@@ -15,6 +15,7 @@ Static HTML pages. No framework, no build step, no package manager, no dependenc
 `about.html`, `mission.html`, `goals.html`, and `404.html` all link back to `index.html`'s remaining sections (e.g. `index.html#contact`) since those sections only exist on the main page. Keep nav/footer structure in sync across all five files when any one changes.
 - `theme.css` — all custom styling, layered on top of the Bulma CSS framework (loaded from a CDN in both HTML files, not vendored in this repo).
 - `logo.svg` — the farm logo, used in the hero section.
+- `og-image.png` — a raster (PNG) version of the logo, used only for social share preview cards (`og:image`/`twitter:image`), since those require a raster format, not SVG.
 - `CNAME` — GitHub Pages custom domain file. Only touch this if the user explicitly asks to change the site's domain.
 
 Icons come from Font Awesome, also loaded via CDN. There is no npm/node project here — don't add `package.json`, a bundler, or a frontend framework unless the user explicitly asks for that kind of overhaul.
@@ -42,6 +43,7 @@ When asked to add a new card, section, or nav item, follow the existing pattern 
 - Three "Apply Here!" buttons (`#scholarshipApplyBtnHome` in `index.html`'s hero, `#scholarshipApplyBtnMission` in `mission.html`, `#scholarshipApplyBtnGoals` in `goals.html`) all link to the scholarship Google Form at `https://forms.gle/4b7SmUfATuS27h1S7`. If the user gives a new form link, update it in all three files.
 - `about.html`'s "Meet Our Team" section has 6 placeholder slots (circular photo area + name/blurb to the right), all still showing "Name Placeholder" / "Bio blurb goes here." and a generic person icon instead of a real photo. When the user gives a real name, photo, and bio for a slot, fill in just that one — don't invent people or bios for the others.
 - The donate box on `index.html` has an italicized tax-exempt disclosure at the bottom (501(c)(3) / tax-deductible language). The EIN was deliberately left out at the user's request — don't add one back in without the user explicitly asking for it.
+- `index.html`, `about.html`, `mission.html`, and `goals.html` each have Open Graph + Twitter Card meta tags (title/description/url/image) for social share previews, pointing at `og-image.png` (a 927x522 PNG of the logo the user provided directly). If the user provides an updated/different image, replace `og-image.png` and keep it referenced the same way in all four files.
 
 ## Styling conventions
 
