@@ -6,12 +6,13 @@ This repo is the marketing/donation website for Fourth Light Farm, a small susta
 
 Static HTML pages. No framework, no build step, no package manager, no dependencies to install.
 
-- `index.html` — the main page: markup, all page sections, and a small inline `<script>` at the bottom for the mobile nav toggle, smooth scrolling, the newsletter form submission, and donation-return notifications.
-- `mission.html` — a second page with the farm's mission statement and the recurring scholarship commitment (currently: 4 scholarships of $500 each, every year 2026-2028). Links to `goals.html` for the full year-by-year breakdown.
-- `goals.html` — a third page with the farm's three-year goals (2026, 2027, 2028), each as its own card of specific initiatives, plus the same scholarship commitment banner as `mission.html`.
+- `index.html` — the main page: markup, remaining page sections (`#home`, `#help`, `#newsletter`, `#donate`, `#contact`), and a small inline `<script>` at the bottom for the mobile nav toggle, smooth scrolling, the newsletter form submission, and donation-return notifications.
+- `about.html` — the About Us page (moved out of `index.html`'s old `#about` section into its own page).
+- `mission.html` — the mission statement and the recurring scholarship commitment (currently: 4 scholarships of $500 each, every year 2026-2028). Links to `goals.html` for the full year-by-year breakdown.
+- `goals.html` — the farm's three-year goals (2026, 2027, 2028), each as its own card of specific initiatives, plus the same scholarship commitment banner as `mission.html`.
+- `404.html` — GitHub Pages' custom not-found page (served automatically for any unmatched URL, no config needed since Pages is `build_type: legacy`). Shows a Font Awesome cow icon (`fa-cow`) with a circular "?" badge overlaid on it and a link back home.
 
-Both `mission.html` and `goals.html` link back to `index.html`'s sections (e.g. `index.html#about`) since those sections only exist on the main page. Keep nav/footer structure in sync across all three files when any one changes.
-- `404.html` — GitHub Pages' custom not-found page (served automatically for any unmatched URL, no config needed since Pages is `build_type: legacy`). Shows a Font Awesome cow icon (`fa-cow`) with a circular "?" badge overlaid on it and a link back home. Keep its nav/footer in sync with the other pages too.
+`about.html`, `mission.html`, `goals.html`, and `404.html` all link back to `index.html`'s remaining sections (e.g. `index.html#contact`) since those sections only exist on the main page. Keep nav/footer structure in sync across all five files when any one changes.
 - `theme.css` — all custom styling, layered on top of the Bulma CSS framework (loaded from a CDN in both HTML files, not vendored in this repo).
 - `logo.svg` — the farm logo, used in the hero section.
 - `CNAME` — GitHub Pages custom domain file. Only touch this if the user explicitly asks to change the site's domain.
@@ -20,14 +21,15 @@ Icons come from Font Awesome, also loaded via CDN. There is no npm/node project 
 
 ## Page structure (`index.html`)
 
-Sections are identified by anchor IDs, referenced by the nav bar and footer links:
+Remaining sections are identified by anchor IDs, referenced by the nav bar and footer links:
 
-- `#home` — hero section with logo, tagline, "Get Involved" and "Support Our Mission" buttons
-- `#about` — About Us copy
+- `#home` — hero section with logo, tagline, "Get Involved", "Support Our Mission", and "Apply Here!" buttons
 - `#help` — "How We Can Help" — three cards (Community Partnerships, Educational Workshops, Hands-On Learning)
 - `#newsletter` — email signup form
 - `#donate` — donation section with one-time and monthly buttons
 - `#contact` — contact info (website, phone, email, social) and footer
+
+About Us content lives on its own page now — see `about.html`.
 
 When asked to add a new card, section, or nav item, follow the existing pattern (Bulma `columns`/`column`/`card` classes) rather than introducing new layout systems.
 
@@ -38,6 +40,7 @@ When asked to add a new card, section, or nav item, follow the existing pattern 
 - The scholarship commitment ("4 Scholarships — $500 Each", every year 2026-2028) appears on both `mission.html` and `goals.html` and must stay in sync between them. It's a specific figure the user gave directly — don't change the number, years, or wording on either page without the user explicitly providing the new value.
 - `goals.html`'s three year-by-year goal lists (2026, 2027, 2028) are specific initiatives the user gave directly — don't add, remove, or reword them without the user's input.
 - Three "Apply Here!" buttons (`#scholarshipApplyBtnHome` in `index.html`'s hero, `#scholarshipApplyBtnMission` in `mission.html`, `#scholarshipApplyBtnGoals` in `goals.html`) all link to the scholarship Google Form at `https://forms.gle/4b7SmUfATuS27h1S7`. If the user gives a new form link, update it in all three files.
+- `about.html`'s "Meet Our Team" section has 6 placeholder slots (circular photo area + name/blurb to the right), all still showing "Name Placeholder" / "Bio blurb goes here." and a generic person icon instead of a real photo. When the user gives a real name, photo, and bio for a slot, fill in just that one — don't invent people or bios for the others.
 
 ## Styling conventions
 
