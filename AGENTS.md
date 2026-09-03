@@ -41,6 +41,7 @@ When asked to add a new card, section, or nav item, follow the existing pattern 
 - `goals.html`'s three year-by-year goal lists (2026, 2027, 2028) are specific initiatives the user gave directly — don't add, remove, or reword them without the user's input.
 - Three "Apply Here!" buttons (`#scholarshipApplyBtnHome` in `index.html`'s hero, `#scholarshipApplyBtnMission` in `mission.html`, `#scholarshipApplyBtnGoals` in `goals.html`) all link to the scholarship Google Form at `https://forms.gle/4b7SmUfATuS27h1S7`. If the user gives a new form link, update it in all three files.
 - `about.html`'s "Meet Our Team" section has 6 placeholder slots (circular photo area + name/blurb to the right), all still showing "Name Placeholder" / "Bio blurb goes here." and a generic person icon instead of a real photo. When the user gives a real name, photo, and bio for a slot, fill in just that one — don't invent people or bios for the others.
+- The donate box on `index.html` has an italicized tax-exempt disclosure at the bottom (501(c)(3) / tax-deductible language). The EIN was deliberately left out at the user's request — don't add one back in without the user explicitly asking for it.
 
 ## Styling conventions
 
