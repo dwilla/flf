@@ -192,6 +192,11 @@ section {
   background-color: var(--flf-dark-soil);
 }
 
+.button.scholarship-hero-btn {
+  padding: 1.25rem 2.5rem;
+  font-size: 1.1rem;
+}
+
 .button.is-earth-outlined {
   background-color: transparent;
   color: var(--flf-earth-brown);
