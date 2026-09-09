@@ -295,6 +295,28 @@ p {
   .fact-box .subtitle {
     font-size: 1rem !important;
   }
+
+  /* Fix: .hero-body and .navbar are flex containers, which let their
+     .container child shrink-wrap to its content's natural width instead
+     of filling the available space, causing horizontal overflow/cut-off
+     content on narrow screens. */
+  .hero .container,
+  .navbar > .container {
+    width: 100%;
+  }
+
+  /* Fix: buttons are inline-flex, so long labels (e.g. the scholarship
+     button) wouldn't wrap and forced the button wider than the screen. */
+  .hero-body .button {
+    white-space: normal;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  .hero-body .button > span:not(.icon) {
+    min-width: 0;
+    white-space: normal;
+  }
 }
 
 /* Utilities */
