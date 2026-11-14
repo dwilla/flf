@@ -10,6 +10,7 @@ Static HTML pages. No framework, no build step, no package manager, no dependenc
 - `about.html` — the About Us page (moved out of `index.html`'s old `#about` section into its own page).
 - `mission.html` — the mission statement and the recurring scholarship commitment (currently: 4 scholarships of $500 each, every year 2026-2028). Links to `goals.html` for the full year-by-year breakdown.
 - `goals.html` — the farm's three-year goals (2026, 2027, 2028), each as its own card of specific initiatives, plus the same scholarship commitment banner as `mission.html`.
+- `curriculum.html`, `affiliates.html`, `merch.html` — "Coming Soon" placeholder pages (same layout, differ only in icon/title/blurb). Replace the Coming Soon block with real content when the user provides it; `merch.html` has no shop or product links yet.
 - `404.html` — GitHub Pages' custom not-found page (served automatically for any unmatched URL, no config needed since Pages is `build_type: legacy`). Shows a Font Awesome cow icon (`fa-cow`) with a circular "?" badge overlaid on it and a link back home.
 
 `about.html`, `mission.html`, `goals.html`, and `404.html` all link back to `index.html`'s remaining sections (e.g. `index.html#contact`) since those sections only exist on the main page. Keep nav/footer structure in sync across all five files when any one changes.
