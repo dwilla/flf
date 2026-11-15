@@ -350,24 +350,35 @@
       });
 
       // ----- Submit -----
-      const showError = (msg) => { const b = $('vaError'); b.textContent = msg; b.classList.remove('va-hide'); b.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+      const showError = (msg, fieldId) => {
+        const b = $('vaError'); b.textContent = msg; b.classList.remove('va-hide');
+        const f = fieldId && $(fieldId);
+        if (f) { f.classList.add('is-danger'); f.scrollIntoView({ behavior: 'smooth', block: 'center' }); try { f.focus({ preventScroll: true }); } catch (_) {} }
+        else b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      };
+      // Clear the red outline as soon as someone types in a field.
+      document.querySelectorAll('#vaForm input').forEach(i => i.addEventListener('input', () => i.classList.remove('is-danger')));
+      // Save a step: the signature name starts out as the full name above (still editable).
+      $('full_name').addEventListener('blur', () => { if (!$('signed_name').value.trim()) $('signed_name').value = $('full_name').value.trim(); });
 
       $('vaForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         $('vaError').classList.add('va-hide');
+        document.querySelectorAll('#vaForm .is-danger').forEach(i => i.classList.remove('is-danger'));
+        if (!$('signed_name').value.trim() && $('full_name').value.trim()) $('signed_name').value = $('full_name').value.trim();
         const v = (id) => $(id).value.trim();
         const minor = isMinor();
 
         if ($('website').value) { finish(); return; }          // a robot filled the hidden box
-        if (!v('full_name')) return showError('Please enter your full name.');
-        if (!$('dob').value) return showError('Please enter your date of birth.');
-        if (!v('phone')) return showError('Please enter your phone number.');
-        if (!/^\S+@\S+\.\S+$/.test(v('email'))) return showError('Please enter a valid email address.');
+        if (!v('full_name')) return showError('Please enter your full name in the first box at the top of the form.', 'full_name');
+        if (!$('dob').value) return showError('Please enter your date of birth.', 'dob');
+        if (!v('phone')) return showError('Please enter your phone number.', 'phone');
+        if (!/^\S+@\S+\.\S+$/.test(v('email'))) return showError('Please enter a valid email address.', 'email');
         if (!v('em_name') || !v('em_phone')) return showError('Please enter an emergency contact name and phone.');
         if (feeOn() && (!v('event_name') || !v('hours'))) return showError('Please tell us the event and the volunteer hours or duties you agreed to in place of the fee.');
         if (minor && (!v('g_name') || !v('g_phone') || gPad.isEmpty())) return showError('Because the volunteer is under 18, a parent or guardian must enter their name and phone and sign.');
         if (!$('agree').checked) return showError('Please check the box to confirm you have read and agree to the agreement.');
-        if (!v('signed_name')) return showError('Please type your full name.');
+        if (!v('signed_name')) return showError('Please type your full name in the signature box near the bottom ("Type your full name").', 'signed_name');
         if (vPad.isEmpty()) return showError('Please sign in the signature box.');
 
         const row = {
