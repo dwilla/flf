@@ -110,6 +110,7 @@
             <div class="column is-12"><label class="label" for="address">Mailing address</label><input class="input" id="address" maxlength="300" autocomplete="street-address"></div>
             <div class="column is-6"><label class="label" for="phone">Phone</label><input class="input" id="phone" type="tel" maxlength="40" autocomplete="tel"></div>
             <div class="column is-6"><label class="label" for="email">Email</label><input class="input" id="email" type="email" maxlength="160" autocomplete="email"></div>
+            <div class="column is-12"><label class="checkbox" style="display:block;font-size:0.95rem;"><input type="checkbox" id="sms"> <strong>Optional:</strong> I agree to receive text messages from Fourth Light Farm at the mobile number above about volunteer scheduling, reminders and announcements, up to 4 messages per week. Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is not required to volunteer. See the <a href="sms-terms.html" target="_blank" rel="noopener">Text Messaging Terms</a> and <a href="#privacy">Privacy Policy</a>. (Volunteers under 18 need a parent or guardian to agree.)</label></div>
             <div class="column is-6"><label class="label" for="em_name">Emergency contact name and relationship</label><input class="input" id="em_name" maxlength="160"></div>
             <div class="column is-6"><label class="label" for="em_phone">Emergency contact phone</label><input class="input" id="em_phone" type="tel" maxlength="40"></div>
             <div class="column is-12"><label class="label" for="medical">Allergies, medical conditions or limits we should know about (optional)</label><textarea class="textarea" id="medical" rows="2" maxlength="1000"></textarea></div>
@@ -296,7 +297,7 @@
       // the database only lets this page ADD agreements, and only FLF Editors can read them.
       const SUPABASE_URL = 'https://aotstnyzhgitgottpgeu.supabase.co';
       const SUPABASE_KEY = 'sb_publishable_L29vAcgkK7KVcU5iwaHdnA_OG1tvQEb';
-      const VERSION = 'v3-2026-11-15';
+      const VERSION = 'v4-2026-11-15';
 
       const $ = (id) => document.getElementById(id);
       $('today').value = new Date().toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' });
@@ -375,6 +376,7 @@
           date_of_birth: $('dob').value,
           address: v('address') || null,
           phone: v('phone'),
+          sms_consent: $('sms').checked && v('phone').replace(/\D/g, '').length >= 10,
           email: v('email'),
           emergency_name: v('em_name'),
           emergency_phone: v('em_phone'),
