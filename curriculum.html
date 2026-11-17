@@ -4,18 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Fourth Light Farm's regenerative agriculture curriculum — coming soon.">
+  <meta name="description" content="Fourth Light Farm's curriculum: play our farm game and learn how crops grow. More lessons coming soon.">
   <title>Curriculum | Fourth Light Farm</title>
 
   <!-- Social Preview Tags -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fourthlightfarm.com/curriculum.html">
   <meta property="og:title" content="Curriculum | Fourth Light Farm">
-  <meta property="og:description" content="Fourth Light Farm's regenerative agriculture curriculum — coming soon.">
+  <meta property="og:description" content="Fourth Light Farm's curriculum: play our farm game and learn how crops grow. More lessons coming soon.">
   <meta property="og:image" content="https://fourthlightfarm.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Curriculum | Fourth Light Farm">
-  <meta name="twitter:description" content="Fourth Light Farm's regenerative agriculture curriculum — coming soon.">
+  <meta name="twitter:description" content="Fourth Light Farm's curriculum: play our farm game and learn how crops grow. More lessons coming soon.">
   <meta name="twitter:image" content="https://fourthlightfarm.com/og-image.png">
 
   <!-- Favicon -->
@@ -65,28 +65,53 @@
       </div>
   </nav>
 
-  <!-- Coming Soon Section -->
-  <section class="hero is-fullheight">
+  <!-- Learn by Playing: the farm game -->
+  <section class="hero" style="padding-top: 6rem;">
     <div class="hero-body">
       <div class="container has-text-centered">
         <span class="icon is-large" style="color: var(--flf-medium-green);">
           <i class="fas fa-book-open fa-3x"></i>
         </span>
         <h2 class="section-title" style="margin-top: 1.5rem;">Curriculum</h2>
-        <div class="est-badge mt-2 mb-4" style="font-size: 1.5rem; padding: 0.75rem 2rem;">
-          Coming Soon
+        <p class="section-subtitle" style="margin-bottom: 2rem;">Learn by playing: run your own little farm.</p>
+
+        <div class="game-frame" id="gameFrame">
+          <button type="button" class="game-start" id="gameStart" aria-label="Play the Fourth Light Farm game">
+            <span class="icon is-large"><i class="fas fa-seedling fa-3x"></i></span>
+            <strong class="game-start-title">Play Fourth Light Farm</strong>
+            <span class="game-start-sub">Click to start</span>
+          </button>
         </div>
-        <p style="font-size: 1.15rem; max-width: 32rem; margin: 0 auto 2rem;">
-          We're building out our regenerative agriculture curriculum. Check back soon to see what we're putting
-          together for students, educators, and the community.
+
+        <div class="buttons is-centered mt-4">
+          <a href="game/farm/index.html" target="_blank" rel="noopener" class="button is-earth-outlined">
+            <span class="icon"><i class="fas fa-expand"></i></span>
+            <span>Play Full Screen</span>
+          </a>
+        </div>
+        <p class="game-note">
+          Pick a seed, click a soil plot to plant it, click again to water it, then harvest and sell your crops.
+          Open the <strong>Journal</strong> in the game for a page on each plant. Works with a mouse, or by tapping on
+          a tablet or phone. On a phone, turn it sideways.
         </p>
-        <a href="index.html#newsletter" class="button is-primary-custom is-large">
-          <span>Stay Updated</span>
-          <span class="icon">
-            <i class="fas fa-envelope-open-text"></i>
-          </span>
-        </a>
       </div>
+    </div>
+  </section>
+
+  <!-- More lessons coming soon -->
+  <section class="has-background-tan" style="padding: 3rem 1.5rem;">
+    <div class="container has-text-centered">
+      <div class="est-badge mb-4">More Lessons Coming Soon</div>
+      <p style="font-size: 1.15rem; max-width: 32rem; margin: 0 auto 2rem;">
+        We're building out our regenerative agriculture curriculum. Check back soon to see what we're putting
+        together for students, educators, and the community.
+      </p>
+      <a href="index.html#newsletter" class="button is-primary-custom is-large">
+        <span>Stay Updated</span>
+        <span class="icon">
+          <i class="fas fa-envelope-open-text"></i>
+        </span>
+      </a>
     </div>
   </section>
 
@@ -142,9 +167,25 @@
     </div>
   </footer>
 
-  <!-- JavaScript for Mobile Menu Toggle -->
+  <!-- JavaScript for Mobile Menu Toggle and the game -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // The game only downloads when a visitor clicks Play.
+      const gameStart = document.getElementById('gameStart');
+      if (gameStart) {
+        gameStart.addEventListener('click', () => {
+          const frame = document.getElementById('gameFrame');
+          const iframe = document.createElement('iframe');
+          iframe.src = 'game/farm/index.html';
+          iframe.title = 'Fourth Light Farm game';
+          iframe.setAttribute('allow', 'fullscreen; autoplay');
+          iframe.setAttribute('allowfullscreen', '');
+          frame.appendChild(iframe);
+          gameStart.remove();
+          iframe.focus();
+        });
+      }
+
       // Get all "navbar-burger" elements
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 

@@ -335,6 +335,67 @@ p {
   }
 }
 
+/* Embedded game (curriculum page) */
+.game-frame {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background: #6f9a45;
+  border: 4px solid var(--flf-earth-brown);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.game-frame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.game-start {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 0;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--flf-medium-green) 0%, #6f9a45 100%);
+  color: var(--flf-cream);
+  transition: filter 0.2s ease;
+}
+
+.game-start:hover {
+  filter: brightness(1.08);
+}
+
+.game-start-title {
+  font-size: clamp(1.25rem, 4vw, 2.25rem);
+  color: var(--flf-cream);
+  letter-spacing: 1px;
+}
+
+.game-start-sub {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.game-note {
+  max-width: 40rem;
+  margin: 0.5rem auto 0;
+  font-size: 0.95rem;
+}
+
 .est-badge {
   display: inline-block;
   background-color: var(--flf-earth-brown);
