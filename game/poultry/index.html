@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+    <title>Poultry Game</title>
+    <style>
+      html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #3B2A1E; font-family: Arial, Helvetica, sans-serif; }
+      #unity-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: block; background: #8A5A34; }
+      #loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #8A5A34; color: #F6E9C8; transition: opacity 0.4s; }
+      #loading h1 { margin: 0 0 18px; font-size: clamp(22px, 5vw, 44px); letter-spacing: 3px; color: #F2B134; text-shadow: 2px 3px 0 #3B2A1E; text-align: center; }
+      #bar { width: min(320px, 60vw); height: 14px; background: #3B2A1E; border-radius: 8px; overflow: hidden; }
+      #fill { height: 100%; width: 0; background: #F2B134; }
+      #msg { margin: 14px 24px 0; font-size: 16px; text-align: center; }
+    </style>
+  </head>
+  <body>
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+    <div id="loading">
+      <h1>POULTRY GAME</h1>
+      <div id="bar"><div id="fill"></div></div>
+      <p id="msg">Warming the incubator...</p>
+    </div>
+    <script src="Build/794692bc9be785c8bc1e20b46c11d42d.loader.js"></script>
+    <script>
+      var fill = document.getElementById("fill");
+      var loading = document.getElementById("loading");
+      var msg = document.getElementById("msg");
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        arguments: [],
+        dataUrl: "Build/fc3fe9742c7667cfa83551e85197ba17.data.unityweb",
+        frameworkUrl: "Build/af6b25a53eb4560cdc843a7d916b2f23.framework.js.unityweb",
+        codeUrl: "Build/ff8ca8ad880b2bddafad621b211e8f4b.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Fourth Light Farm",
+        productName: "Poultry Game",
+        productVersion: "0.1.0",
+      }, function (progress) {
+        fill.style.width = (progress * 100) + "%";
+      }).then(function () {
+        loading.style.opacity = 0;
+        setTimeout(function () { loading.style.display = "none"; }, 400);
+      }).catch(function (message) {
+        msg.textContent = "Sorry, the game could not start. " + message;
+      });
+    </script>
+  </body>
+</html>

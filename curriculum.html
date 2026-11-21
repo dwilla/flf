@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Fourth Light Farm's curriculum: play our farm game and learn how crops grow. More lessons coming soon.">
+  <meta name="description" content="Fourth Light Farm's curriculum: play our farm game and poultry game to learn how crops grow and how chicks hatch. More lessons coming soon.">
   <title>Curriculum | Fourth Light Farm</title>
 
   <!-- Social Preview Tags -->
@@ -73,10 +73,22 @@
           <i class="fas fa-book-open fa-3x"></i>
         </span>
         <h2 class="section-title" style="margin-top: 1.5rem;">Curriculum</h2>
-        <p class="section-subtitle" style="margin-bottom: 2rem;">Learn by playing: run your own little farm.</p>
+        <p class="section-subtitle" style="margin-bottom: 1.5rem;">Learn by playing: run a farm, then hatch a flock.</p>
 
+        <div class="buttons is-centered mb-5">
+          <a href="#farm-game" class="button is-earth-outlined">
+            <span class="icon"><i class="fas fa-seedling"></i></span>
+            <span>Preview: Farm Game</span>
+          </a>
+          <a href="#poultry-game" class="button is-earth-outlined">
+            <span class="icon"><i class="fas fa-egg"></i></span>
+            <span>Preview: Poultry Game</span>
+          </a>
+        </div>
+
+        <h3 class="title is-4" id="farm-game" style="scroll-margin-top: 6rem;">Fourth Light Farm</h3>
         <div class="game-frame" id="gameFrame">
-          <button type="button" class="game-start" id="gameStart" aria-label="Play the Fourth Light Farm game">
+          <button type="button" class="game-start" data-game="game/farm/index.html" data-title="Fourth Light Farm game" aria-label="Play the Fourth Light Farm game">
             <span class="icon is-large"><i class="fas fa-seedling fa-3x"></i></span>
             <strong class="game-start-title">Play Fourth Light Farm</strong>
             <span class="game-start-sub">Click to start</span>
@@ -93,6 +105,34 @@
           Pick a seed, click a soil plot to plant it, click again to water it, then harvest and sell your crops.
           Open the <strong>Journal</strong> in the game for a page on each plant. Works with a mouse, or by tapping on
           a tablet or phone. On a phone, turn it sideways.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learn by Playing: the poultry game -->
+  <section class="hero" style="padding-bottom: 3rem;">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h3 class="title is-4" id="poultry-game" style="scroll-margin-top: 6rem;">Poultry Game</h3>
+        <div class="game-frame game-frame-poultry">
+          <button type="button" class="game-start game-start-poultry" data-game="game/poultry/index.html" data-title="Poultry Game" aria-label="Play the Poultry Game">
+            <span class="icon is-large"><i class="fas fa-egg fa-3x"></i></span>
+            <strong class="game-start-title">Play Poultry Game</strong>
+            <span class="game-start-sub">Click to start</span>
+          </button>
+        </div>
+
+        <div class="buttons is-centered mt-4">
+          <a href="game/poultry/index.html" target="_blank" rel="noopener" class="button is-earth-outlined">
+            <span class="icon"><i class="fas fa-expand"></i></span>
+            <span>Play Full Screen</span>
+          </a>
+        </div>
+        <p class="game-note">
+          Hatch six heritage eggs. Keep the incubator warm and humid, turn the eggs, and candle them to find the
+          ones that will not hatch. Then raise your chicks in a brooder. Press <strong>Help</strong> in the game for
+          the rules. Works with a mouse, or by tapping on a tablet or phone. On a phone, turn it sideways.
         </p>
       </div>
     </div>
@@ -171,20 +211,19 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // The game only downloads when a visitor clicks Play.
-      const gameStart = document.getElementById('gameStart');
-      if (gameStart) {
-        gameStart.addEventListener('click', () => {
-          const frame = document.getElementById('gameFrame');
+      document.querySelectorAll('.game-start').forEach(startBtn => {
+        startBtn.addEventListener('click', () => {
+          const frame = startBtn.parentElement;
           const iframe = document.createElement('iframe');
-          iframe.src = 'game/farm/index.html';
-          iframe.title = 'Fourth Light Farm game';
+          iframe.src = startBtn.dataset.game;
+          iframe.title = startBtn.dataset.title;
           iframe.setAttribute('allow', 'fullscreen; autoplay');
           iframe.setAttribute('allowfullscreen', '');
           frame.appendChild(iframe);
-          gameStart.remove();
+          startBtn.remove();
           iframe.focus();
         });
-      }
+      });
 
       // Get all "navbar-burger" elements
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);

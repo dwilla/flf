@@ -380,6 +380,15 @@ p {
   filter: brightness(1.08);
 }
 
+/* The poultry game uses warm wood tones instead of meadow green. */
+.game-frame-poultry {
+  background: #8a5a34;
+}
+
+.game-start-poultry {
+  background: linear-gradient(135deg, var(--flf-earth-brown) 0%, #a9753f 100%);
+}
+
 .game-start-title {
   font-size: clamp(1.25rem, 4vw, 2.25rem);
   color: var(--flf-cream);
