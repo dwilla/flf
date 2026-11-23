@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sirius Maintenance List</title>
+<style>
+  :root { --brown:#3e2c1f; --green:#5f7452; --sage:#b8c5a8; --cream:#f5f2ea; --ink:#2b2423; --muted:#6b6359; --line:#d9d2c0; --red:#a33a2b; --amber:#b4691f; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Segoe UI',Tahoma,Arial,sans-serif; background:var(--cream); color:var(--ink); font-size:15px; }
+  header { background:var(--brown); color:#fff; padding:12px 16px; }
+  header h1 { margin:0; font-size:1.15rem; letter-spacing:.02em; }
+  header .sub { color:var(--sage); font-size:.85rem; margin-top:2px; }
+  main { max-width:1000px; margin:0 auto; padding:14px 14px 60px; }
+  .bar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:12px; }
+  .bar input[type=search] { flex:1 1 220px; padding:8px 10px; border:1px solid #b9b2a2; border-radius:6px; font:inherit; background:#fff; min-width:0; }
+  button { font:inherit; font-weight:600; border:0; border-radius:6px; cursor:pointer; background:var(--brown); color:#fff; padding:8px 14px; min-height:38px; }
+  button.alt { background:#fff; color:var(--brown); border:1.5px solid var(--brown); }
+  button.on { background:var(--green); color:#fff; border-color:var(--green); }
+  button.small { min-height:30px; padding:3px 10px; font-size:.85rem; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .chip { background:#fff; border:1px solid var(--line); border-radius:8px; padding:6px 12px; font-size:.9rem; }
+  .chip b { font-size:1.1rem; color:var(--brown); }
+  .chip.over b { color:var(--red); } .chip.soon b { color:var(--amber); } .chip.ok b { color:var(--green); }
+  details.cat { background:#fff; border:1px solid var(--line); border-radius:10px; margin-bottom:10px; }
+  details.cat > summary { cursor:pointer; padding:11px 14px; display:flex; flex-wrap:wrap; gap:6px 12px; align-items:center; list-style:none; }
+  details.cat > summary::-webkit-details-marker { display:none; }
+  details.cat > summary::before { content:'\25B8'; color:var(--muted); }
+  details.cat[open] > summary::before { content:'\25BE'; }
+  details.cat > summary h2 { margin:0; font-size:1.02rem; color:var(--brown); }
+  .count { font-size:.82rem; color:var(--muted); margin-left:auto; }
+  .count b.n { color:var(--red); }
+  .items { padding:0 14px 12px; }
+  .item { display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:1px solid #f0ece0; }
+  .nm { flex:1 1 auto; min-width:0; }
+  .nm .n { font-weight:600; }
+  .nm .d { display:block; font-size:.82rem; color:var(--muted); }
+  .freq { flex:0 0 auto; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; background:#eee9da; color:var(--muted); border-radius:5px; padding:2px 7px; }
+  .stat { flex:0 0 auto; width:96px; text-align:center; border-radius:6px; padding:3px 0; font-size:.78rem; font-weight:700; border:1.5px solid var(--line); }
+  .stat.over { background:#f6dcd8; border-color:var(--red); color:var(--red); }
+  .stat.soon { background:#fbe9d3; border-color:var(--amber); color:#7a4a10; }
+  .stat.ok { background:#e3f0e1; border-color:var(--green); color:var(--green); }
+  .stat.never { background:#fff; color:var(--muted); }
+  .del { flex:0 0 auto; background:none; color:var(--red); border:0; padding:2px 8px; min-height:0; font-size:1rem; }
+  .addrow { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  .addrow input, .addrow select { padding:6px 9px; border:1px solid #b9b2a2; border-radius:6px; font:inherit; min-width:0; background:#fff; }
+  .addrow input { flex:1 1 200px; }
+  .note { background:#fbf1e3; color:#7a4a10; border-radius:8px; padding:8px 12px; font-size:.88rem; margin:0 0 12px; }
+  .empty { color:var(--muted); font-size:.9rem; padding:8px 0; }
+  @media (max-width:560px) { .stat { width:72px; font-size:.7rem; } .freq { display:none; } }
+  @media print {
+    header, .bar, .chips, .addrow, .del, button, .note, details.cat > summary::before { display:none !important; }
+    body { background:#fff; }
+    details.cat { break-inside:avoid; border:0; }
+    details.cat > .items { display:block !important; }
+    .item::before { content:'\2610'; font-size:1.1rem; }
+    .count { display:none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Sirius Maintenance List</h1>
+  <div class="sub">Shared upkeep for homes, buildings and grounds &mdash; Fourth Light Farm workspace</div>
+</header>
+<main>
+  <div class="note">Starter list built from scratch for an eco-village (composting toilets, solar/wind, wood heat, shared grounds). Edit it to match what Sirius actually has: add, delete, and tap <b>Done today</b> as you go. It saves in this browser only.</div>
+  <div class="chips" id="chips"></div>
+  <div class="bar">
+    <input type="search" id="q" placeholder="Search tasks...">
+    <button class="alt small" data-f="all">All</button>
+    <button class="alt small" data-f="winter">Winter</button>
+    <button class="alt small" data-f="over">Overdue</button>
+    <button class="alt small" data-f="soon">Due soon</button>
+    <button class="alt small" id="print">Print</button>
+    <button class="alt small" id="reset">Reset to starter</button>
+  </div>
+  <div id="cats"></div>
+</main>
+<script>
+(function(){
+  var KEY='siriusMaintenanceV1';
+  var FREQ={daily:1,weekly:7,monthly:30,seasonal:91,annual:365};
+  var FREQ_LABEL={daily:'Daily',weekly:'Weekly',monthly:'Monthly',seasonal:'Seasonal',annual:'Annual'};
+  var S={
+   'Winter Watch (ongoing)':[
+    ['Shovel and salt steps, porches, paths and entries to homes and Community Center','daily','w'],
+    ['Check woodstoves: keep fires safe, ash bucket outside, wood box stocked','daily','w'],
+    ['Check firewood supply vs. weather; restack and cover under cover','weekly','w'],
+    ['Clear snow off solar panels and wind turbine area when safe','weekly','w'],
+    ['Check roof snow load, ice dams and icicles over doors and walks','weekly','w'],
+    ['Check pipes in cold spots: crawlspaces, exterior walls, unheated rooms','weekly','w'],
+    ['Check well, pressure tank and greywater lines for freezing','weekly','w'],
+    ['Check composting toilet bins and compost piles; add dry carbon, keep vents clear','weekly','w'],
+    ['Plow / blow driveway and parking; mark edges and culverts with stakes','weekly','w'],
+    ['Check sand/salt and shovel supply; restock','weekly','w'],
+    ['Test smoke and CO detectors (heating season)','monthly','w'],
+    ['Check greenhouse and cold frames: vents, snow load, heat','weekly','w'],
+    ['Check storm supplies: water, lights, batteries, backup heat and food','monthly','w'],
+    ['Walk each building: drafts, leaks, ice, frozen drains, mold','monthly','w'],
+    ['Check ponds and trails for thin ice; post warning signs','monthly','w'],
+    ['Check on neighbors and residents who need help during storms','weekly','w']],
+   'Homes & Buildings':[
+    ['Check roof, gutters and downspouts for debris and leaks','seasonal','w'],
+    ['Walk exterior: siding, trim, foundation, rodent entry points','seasonal'],
+    ['Test smoke and CO detectors; replace batteries','monthly'],
+    ['Check doors, windows, weatherstripping and caulk','seasonal'],
+    ['Inspect porches, steps and railings for rot or loose fasteners','seasonal'],
+    ['Clean out gutters after leaf drop','annual','w'],
+    ['Check attic and crawlspace for moisture, pests, insulation gaps','annual']],
+   'Composting Toilets':[
+    ['Add cover material (sawdust or leaf mold) and check supply','weekly'],
+    ['Empty or rotate bins per system schedule','monthly'],
+    ['Check vents and fans for airflow; clean screens','seasonal'],
+    ['Wipe, sanitize and restock supplies','weekly'],
+    ['Inspect finished-compost curing area','seasonal']],
+   'Solar, Wind & Electrical':[
+    ['Check inverter and charge controller display for faults','weekly'],
+    ['Check battery water and terminals (if flooded lead-acid)','monthly'],
+    ['Clear snow, leaves and shade from solar panels','seasonal','w'],
+    ['Inspect panel mounts, wiring and conduit','annual'],
+    ['Inspect wind turbine: tower, guy wires, blades, bearings','annual'],
+    ['Test GFCI outlets and breakers','seasonal']],
+   'Heat & Wood Stoves':[
+    ['Sweep chimney and flue; inspect creosote','annual','w'],
+    ['Check stove gaskets, door seal and firebrick','annual'],
+    ['Stack and cover firewood; check seasoning','seasonal','w'],
+    ['Clean ash and check ash bucket / safe disposal','weekly','w'],
+    ['Service backup or mini-split heating','annual']],
+   'Water & Plumbing':[
+    ['Check well pump, pressure tank and water filters','seasonal'],
+    ['Look for leaks under sinks and around fixtures','monthly'],
+    ['Drain and winterize outdoor spigots and hoses','annual','w'],
+    ['Inspect greywater or septic system; keep area clear','seasonal'],
+    ['Check rain barrels / catchment and overflow','seasonal']],
+   'Community Center & Kitchen':[
+    ['Deep clean kitchen, fridge and pantry; check dates','monthly'],
+    ['Check dish area, drains and grease traps','monthly'],
+    ['Test fire extinguishers and check gauges','annual'],
+    ['Clear and clean common spaces after events','weekly'],
+    ['Check the sauna stove, bench boards and ventilation','seasonal']],
+   'Grounds, Trails & Pond':[
+    ['Mow, brush-hog and trim paths and shared lawns','monthly'],
+    ['Walk trails; clear fallen limbs and check footing','seasonal'],
+    ['Check pond edges, overflow and water level','seasonal'],
+    ['Maintain labyrinth: weed, edge and refresh','seasonal'],
+    ['Check driveway, culverts and ditches before storms','seasonal'],
+    ['Plow / sand / shovel prep: stage salt, shovels and plow gear','annual','w'],
+    ['Inspect fences, gates and signage','annual']],
+   'Garden, Compost & Food System':[
+    ['Turn and monitor compost piles','weekly'],
+    ['Check garden beds, mulch and irrigation','weekly'],
+    ['Inspect greenhouse / cold frames: glazing, vents, doors','seasonal'],
+    ['Check fruit trees and shrubs: prune, protect from deer','annual'],
+    ['Clean and put away seed starting supplies','annual']],
+   'Tools, Vehicles & Shop':[
+    ['Sharpen and oil hand tools; check chainsaw and mower','seasonal'],
+    ['Check fuel, oil and filters on equipment','seasonal'],
+    ['Inventory shared tools; return strays to the shop','monthly'],
+    ['Check ladder condition and safety gear','seasonal'],
+    ['Service vehicles: tires, brakes, fluids, inspection','annual']],
+   'Safety & Emergency':[
+    ['Check first-aid kits and restock','seasonal'],
+    ['Review emergency plan, contacts and exits','annual'],
+    ['Check flashlights, batteries, water and winter storm supplies','annual'],
+    ['Check wood-stove clearances and fire safety in each home','annual','w']]
+  };
+
+  function starter(){
+    var out=[],id=1;
+    Object.keys(S).forEach(function(area){
+      S[area].forEach(function(t){ out.push({id:'s'+(id++),area:area,name:t[0],freq:t[1],last:null,custom:false,w:t[2]==='w'}); });
+    });
+    return out;
+  }
+  var tasks;
+  try{ tasks=JSON.parse(localStorage.getItem(KEY)); }catch(e){}
+  if(!Array.isArray(tasks)) tasks=starter();
+  var filter='all', openCats={};
+
+  function save(){ try{localStorage.setItem(KEY,JSON.stringify(tasks));}catch(e){} }
+  function today(){ var d=new Date(); d.setHours(0,0,0,0); return d; }
+  function status(t){
+    if(!t.last) return {k:'never',txt:'Not done yet',days:Infinity};
+    var last=new Date(t.last+'T00:00:00');
+    var since=Math.round((today()-last)/86400000);
+    var left=FREQ[t.freq]-since;
+    if(left<0) return {k:'over',txt:'Overdue '+(-left)+'d',days:left};
+    if(left<=Math.max(2,Math.round(FREQ[t.freq]*0.2))) return {k:'soon',txt:'Due in '+left+'d',days:left};
+    return {k:'ok',txt:'OK ('+left+'d left)',days:left};
+  }
+  function iso(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function areas(){ var a=[]; tasks.forEach(function(t){ if(a.indexOf(t.area)<0) a.push(t.area); }); return a; }
+
+  function render(){
+    var q=document.getElementById('q').value.toLowerCase();
+    var cnt={over:0,soon:0,ok:0,never:0};
+    tasks.forEach(function(t){ cnt[status(t).k]++; });
+    document.getElementById('chips').innerHTML=
+      '<div class="chip over"><b>'+cnt.over+'</b> overdue</div>'+
+      '<div class="chip soon"><b>'+cnt.soon+'</b> due soon</div>'+
+      '<div class="chip ok"><b>'+cnt.ok+'</b> up to date</div>'+
+      '<div class="chip"><b>'+cnt.never+'</b> not started</div>';
+    document.querySelectorAll('[data-f]').forEach(function(b){ b.classList.toggle('on',b.getAttribute('data-f')===filter); });
+    var html='';
+    areas().forEach(function(area){
+      var list=tasks.filter(function(t){
+        if(t.area!==area) return false;
+        if(q && (t.name+' '+t.area).toLowerCase().indexOf(q)<0) return false;
+        var k=status(t).k;
+        if(filter==='winter' && !t.w) return false;
+        if(filter==='over' && k!=='over') return false;
+        if(filter==='soon' && k!=='soon') return false;
+        return true;
+      });
+      var all=tasks.filter(function(t){return t.area===area;});
+      if(!list.length && (q||filter!=='all')) return;
+      var over=all.filter(function(t){return status(t).k==='over';}).length;
+      var open=(q||filter!=='all'||openCats[area])?' open':'';
+      html+='<details class="cat" data-area="'+esc(area)+'"'+open+'><summary><h2>'+esc(area)+'</h2><span class="count">'+all.length+' tasks'+(over?' &middot; <b class="n">'+over+' overdue</b>':'')+'</span></summary><div class="items">';
+      if(!list.length) html+='<div class="empty">No tasks here.</div>';
+      list.forEach(function(t){
+        var s=status(t);
+        html+='<div class="item"><div class="nm"><span class="n">'+esc(t.name)+'</span><span class="d">'+(t.last?'Last done '+t.last:'Never marked done')+'</span></div>'+
+          '<span class="freq">'+(t.w?'&#10052; ':'')+FREQ_LABEL[t.freq]+'</span><span class="stat '+s.k+'">'+s.txt+'</span>'+
+          '<button class="small" data-done="'+t.id+'">Done today</button>'+
+          '<button class="del" data-del="'+t.id+'" title="Delete task">&times;</button></div>';
+      });
+      html+='<div class="addrow"><input placeholder="Add a task to '+esc(area)+'..." data-addinput="'+esc(area)+'"><select data-addfreq="'+esc(area)+'">'+
+        Object.keys(FREQ_LABEL).map(function(f){return '<option value="'+f+'">'+FREQ_LABEL[f]+'</option>';}).join('')+
+        '</select><label style="font-size:.85rem;align-self:center"><input type="checkbox" data-addw="'+esc(area)+'" style="flex:none;min-width:0"> Winter</label><button class="small" data-add="'+esc(area)+'">Add</button></div>';
+      html+='</div></details>';
+    });
+    html+='<div class="addrow" style="margin-top:14px"><input id="newArea" placeholder="New area (e.g. Barn, Guest House)..."><button class="small" id="addArea">Add area</button></div>';
+    document.getElementById('cats').innerHTML=html;
+  }
+
+  document.addEventListener('toggle',function(e){
+    var d=e.target; if(d.classList&&d.classList.contains('cat')) openCats[d.getAttribute('data-area')]=d.open;
+  },true);
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var id;
+    if(b.hasAttribute('data-f')){ filter=b.getAttribute('data-f'); render(); return; }
+    if((id=b.getAttribute('data-done'))){ tasks.forEach(function(t){ if(t.id===id) t.last=iso(); }); save(); render(); return; }
+    if((id=b.getAttribute('data-del'))){ if(confirm('Delete this task?')){ tasks=tasks.filter(function(t){return t.id!==id;}); save(); render(); } return; }
+    if(b.hasAttribute('data-add')){
+      var a=b.getAttribute('data-add'), box=b.parentNode;
+      var name=box.querySelector('input').value.trim(); if(!name) return;
+      tasks.push({id:'c'+Date.now(),area:a,name:name,freq:box.querySelector('select').value,last:null,custom:true,w:box.querySelector('[data-addw]').checked});
+      openCats[a]=true; save(); render(); return;
+    }
+    if(b.id==='addArea'){
+      var n=document.getElementById('newArea').value.trim(); if(!n||areas().indexOf(n)>=0) return;
+      tasks.push({id:'c'+Date.now(),area:n,name:'First task for '+n+' (edit or delete)',freq:'monthly',last:null,custom:true});
+      openCats[n]=true; save(); render(); return;
+    }
+    if(b.id==='print'){ document.querySelectorAll('details.cat').forEach(function(d){d.open=true;}); window.print(); return; }
+    if(b.id==='reset'){ if(confirm('Replace everything with the starter list? Your added tasks and done dates will be lost.')){ tasks=starter(); openCats={}; save(); render(); } }
+  });
+  document.getElementById('q').addEventListener('input',render);
+  render();
+})();
+</script>
+</body>
+</html>
