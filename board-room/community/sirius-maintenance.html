@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sirius Maintenance List</title>
+<title>Community Maintenance List</title>
 <style>
   :root { --brown:#3e2c1f; --green:#5f7452; --sage:#b8c5a8; --cream:#f5f2ea; --ink:#2b2423; --muted:#6b6359; --line:#d9d2c0; --red:#a33a2b; --amber:#b4691f; }
   * { box-sizing:border-box; }
@@ -60,11 +60,11 @@
 </head>
 <body>
 <header>
-  <h1>Sirius Maintenance List</h1>
-  <div class="sub">Shared upkeep for homes, buildings and grounds &mdash; Fourth Light Farm workspace</div>
+  <h1 id="ttl">Sirius Maintenance List</h1>
+  <div class="sub">Shared upkeep for homes, buildings and grounds &mdash; Fourth Light Farm</div>
 </header>
 <main>
-  <div class="note">Starter list built from scratch for an eco-village (composting toilets, solar/wind, wood heat, shared grounds). Edit it to match what Sirius actually has: add, delete, and tap <b>Done today</b> as you go. It saves in this browser only.</div>
+  <div class="note" id="note"></div>
   <div class="chips" id="chips"></div>
   <div class="bar">
     <input type="search" id="q" placeholder="Search tasks...">
@@ -79,7 +79,16 @@
 </main>
 <script>
 (function(){
-  var KEY='siriusMaintenanceV1';
+  var P=new URLSearchParams(location.search);
+  var CID=(P.get('c')||'sirius').replace(/[^a-z0-9_-]/gi,'').slice(0,40)||'sirius';
+  var CNAME=P.get('name')||'Sirius';
+  var BLANK=P.get('blank')==='1';
+  var KEY=CID==='sirius'?'siriusMaintenanceV1':'communityMaintV1:'+CID;
+  document.getElementById('ttl').textContent=CNAME+' Maintenance List';
+  document.title=CNAME+' Maintenance List';
+  document.getElementById('note').innerHTML=BLANK
+    ?'Blank list for <b>'+CNAME.replace(/[<>&]/g,'')+'</b>. Add an area below, then add tasks and tap <b>Done today</b> as you go. It saves in this browser only.'
+    :'Starter list for an eco-village (composting toilets, solar/wind, wood heat, shared grounds). Edit it to match what '+CNAME.replace(/[<>&]/g,'')+' actually has: add, delete, and tap <b>Done today</b> as you go. It saves in this browser only.';
   var FREQ={daily:1,weekly:7,monthly:30,seasonal:91,annual:365};
   var FREQ_LABEL={daily:'Daily',weekly:'Weekly',monthly:'Monthly',seasonal:'Seasonal',annual:'Annual'};
   var S={
@@ -175,7 +184,7 @@
   }
   var tasks;
   try{ tasks=JSON.parse(localStorage.getItem(KEY)); }catch(e){}
-  if(!Array.isArray(tasks)) tasks=starter();
+  if(!Array.isArray(tasks)) tasks=BLANK?[]:starter();
   var filter='all', openCats={};
 
   function save(){ try{localStorage.setItem(KEY,JSON.stringify(tasks));}catch(e){} }
@@ -257,7 +266,7 @@
       openCats[n]=true; save(); render(); return;
     }
     if(b.id==='print'){ document.querySelectorAll('details.cat').forEach(function(d){d.open=true;}); window.print(); return; }
-    if(b.id==='reset'){ if(confirm('Replace everything with the starter list? Your added tasks and done dates will be lost.')){ tasks=starter(); openCats={}; save(); render(); } }
+    if(b.id==='reset'){ if(confirm('Replace everything with the '+(BLANK?'empty':'starter')+' list? Your added tasks and done dates will be lost.')){ tasks=BLANK?[]:starter(); openCats={}; save(); render(); } }
   });
   document.getElementById('q').addEventListener('input',render);
   render();
